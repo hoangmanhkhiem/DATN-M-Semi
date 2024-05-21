@@ -1,0 +1,15 @@
+[
+    {
+      "id": 1,
+      "room": 401,
+      "name": "May1",
+      "path": "D:\\May3\\May3.vmx",
+      "status": "Shutdown",
+      "ip": "192.168.1.299",
+      "os": "Windows 11",
+      "cpu": "2",
+      "memory": "4GB",
+      "disk": "60GB",
+      "network": "NAT"
+    }
+  ]

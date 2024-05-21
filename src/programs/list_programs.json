@@ -1,0 +1,50 @@
+[
+    {
+        "id" : 1,
+        "name" : "Test",
+        "link_source" : "C:/Users/Administrator/Downloads/CocCocSetup.exe",
+        "link_in_vm" : "C:/Users/admin/Desktop/CocCocSetup.exe"
+    },
+    {
+        "id" : 2,
+        "name" : "Calculator",
+        "link_source" : "/home/skromnyy/Documents/BEDARN-master/static/programs/source_programs/Calculator",
+        "link_in_vm" : "C:/Users/bedarn/Desktop/Calculator"
+    },
+    {
+        "id" : 3,
+        "name" : "Paint",
+        "link_source" : "/home/skromnyy/Documents/BEDARN-master/static/programs/source_programs/Paint",
+        "link_in_vm" : "C:/Users/bedarn/Desktop/Paint"
+    },
+    {
+        "id" : 4,
+        "name" : "Word",
+        "link_source" : "/home/skromnyy/Documents/BEDARN-master/static/programs/source_programs/Word",
+        "link_in_vm" : "C:/Users/bedarn/Desktop/Word"
+    },
+    {
+        "id" : 5,
+        "name" : "Excel",
+        "link_source" : "/home/skromnyy/Documents/BEDARN-master/static/programs/source_programs/Excel",
+        "link_in_vm" : "C:/Users/bedarn/Desktop/Excel"
+    },
+    {
+        "id" : 6,
+        "name" : "PowerPoint",
+        "link_source" : "/home/skromnyy/Documents/BEDARN-master/static/programs/source_programs/PowerPoint",
+        "link_in_vm" : "C:/Users/bedarn/Desktop/PowerPoint"
+    },
+    {
+        "id" : 7,
+        "name" : "Outlook",
+        "link_source" : "/home/skromnyy/Documents/BEDARN-master/static/programs/source_programs/Outlook",
+        "link_in_vm" : "C:/Users/bedarn/Desktop/Outlook"
+    },
+    {
+        "id" : 8,
+        "name" : "OneNote",
+        "link_source" : "/home/skromnyy/Documents/BEDARN-master/static/programs/source_programs/OneNote",
+        "link_in_vm" : "C:/Users/bedarn/Desktop/OneNote"
+    }
+]

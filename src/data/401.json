@@ -1,0 +1,28 @@
+[
+  {
+    "id": 2,
+    "room": 401,
+    "name": "May10",
+    "path": "D:\\May10\\May10.vmx",
+    "status": "Shutdown",
+    "ip": "192.168.1.199",
+    "os": "Windows 10",
+    "cpu": "2",
+    "memory": "4GB",
+    "disk": "60GB",
+    "network": "NAT"
+  },
+  {
+    "id": 2,
+    "room": 401,
+    "name": "May10",
+    "path": "D:\\May10\\May10.vmx",
+    "status": "Shutdown",
+    "ip": "192.168.1.198",
+    "os": "Windows 10",
+    "cpu": "2",
+    "memory": "4GB",
+    "disk": "60GB",
+    "network": "NAT"
+  }
+]
