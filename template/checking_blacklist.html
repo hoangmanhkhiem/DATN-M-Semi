@@ -20,15 +20,88 @@
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <link rel="stylesheet" href="../static/styles.css">
     <link rel="stylesheet" href="../static/all.css">
-    <link rel="stylesheet" href="../static/form.css">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i,700,700i" rel="stylesheet">
     <title>DATN</title>
+    <style>
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 999;
+            /* Ensure modal displays above other elements */
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(255, 255, 255, 0);
+            /* Semi-transparent black overlay */
+        }
 
+        .modal-content {
+            background-color: #fefefe;
+            margin: 20% auto;
+            /* Center modal vertically and horizontally */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 50%;
+            animation-name: modal-show;
+            animation-duration: 0.3s;
+        }
+
+        .modal-footer {
+            display: flex;
+            flex-shrink: 0;
+            flex-wrap: wrap;
+            align-items: stretch;
+            justify-content: space-evenly;
+            padding: calc(var(--bs-modal-footer-padding-y) - var(--bs-modal-footer-gap) * .5) calc(var(--bs-modal-footer-padding-x) - var(--bs-modal-footer-gap) * .5);
+            background-color: var(--bs-modal-footer-bg);
+            border-top: var(--bs-modal-footer-border-width) solid var(--bs-modal-footer-border-color);
+            border-bottom-right-radius: var(--bs-modal-inner-border-radius);
+            border-bottom-left-radius: var(--bs-modal-inner-border-radius);
+            align-content: stretch;
+        }
+
+        .modal-btn {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            align-content: stretch;
+            justify-content: space-between;
+            align-items: stretch;
+        }
+
+        @keyframes modal-show {
+            from {
+                margin-top: -100px;
+                opacity: 0;
+            }
+
+            to {
+                margin-top: 0;
+                opacity: 1;
+            }
+        }
+
+        .closeBtn {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .closeBtn:hover,
+        .closeBtn:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
 </head>
 
 <body>
 <!--Container -->
-<div class="mx-auto bg-grey-lightest">
+<div class="mx-auto bg-grey-400">
     <!--Screen-->
     <div class="min-h-screen flex flex-col">
         <!--Header Section Starts Here-->
@@ -36,9 +109,8 @@
             <div class="flex justify-between">
                 <div class="p-1 mx-3 inline-flex items-center">
                     <i class="fas fa-bars pr-2 text-white" onclick="sidebarToggle()"></i>
-                    <h1 class="text-white p-2">MENU</h1>
+                    <h1 class="text-white p-2">Menu</h1>
                 </div>
-
             </div>
         </header>
         <!--/Header-->
@@ -104,34 +176,12 @@
             </aside>
             <!--/Sidebar-->
             <!--Main-->
-            <main class="bg-white-500 flex-1 p-3 overflow-hidden">
+            <main class="bg-white-300 flex-1 p-3 overflow-hidden">
                 <!-- MAIN VIEW -->
-                <div class="container">
-                    <style>
-                        .title_zuno {
-                            display: flex;
-                            justify-content: center;
-                            align-items: center;
-                        }
-
-                        .title_zuno h1 {
-                            margin-left: 10px;
-                        }
-                    </style>
-                    <div class="title_zuno">
-                        <!-- <img src="./static/image.png"> -->
-                        <img src="./static/logo_utc.jpg" width="70px">
-                        <div>
-                            <h1 class="text-2xl font-bold">Hệ thống giám sát và quản trị phần mềm </h1>
-                            <h1>Trung tâm Ứng Dụng CNTT Trường ĐHGTVT</h1>
-                        </div>
-                    </div>
-                </div>
                 <div class="container my-5 pt-5">
                     <div class="col-md-12">
                         <form hx-trigger="submit" hx-target="#hxResponseTarget">
                             <div class="row">
-
                                 <!-- SCANNER CARD -->
                                 <div class="col-md-9">
                                     <div class="card">
@@ -144,7 +194,7 @@
                                                        class="input-group-text">Target(s):</label>
                                                 <input type="text" id="ipRangeInput" name="ip_range"
                                                        class="form-control" placeholder="Example: 192.168.0.1-100">
-                                                <button onclick="run()" class="btn btn-primary"><i
+                                                <button onclick="run()" type="submit" class="btn btn-primary"><i
                                                         class="fas fa-bolt"></i></button>
                                             </div>
                                         </div>
@@ -158,55 +208,78 @@
                                         </div>
                                     </div>
                                 </div>
-
-                                <!-- RESULTS CARD -->
-                                <div class="container">
-                                    <div class="card mt-4">
-                                        <div class="card-header">
-                                            Hardware specifications
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="container">
-                                                <table class="table table-striped table-hover">
-                                                    <thead class="table-secondary">
-                                                    <tr>
-                                                        <th>ID</th>
-                                                        <th>Name</th>
-                                                        <th>Phòng</th>
-                                                        <th>IP</th>
-                                                        <th>Coc Coc</th>
-                                                        <th>Win rar</th>
-                                                        <th>WORD</th>
-                                                        <th>EXCEL</th>
-                                                        <th>POWERPOINT</th>
-                                                        <th>OUTLOOK</th>
-                                                        <th>ONENOTE</th>
-                                                    </tr>
-                                                    </thead>
-                                                    <tbody id="tableBody">
-
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </form>
                     </div>
                 </div>
+
+                <!-- RESULTS CARD -->
+                <div class="container">
+                    <div class="card mt-4">
+                        <div class="card-header">
+                            Scan Results
+                        </div>
+                        <div class="card-body">
+                            <div class="container">
+                                <table class="table table-striped table-hover">
+                                    <thead class="table-secondary">
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>ENGINE ROOM</th>
+                                        <th>Name</th>
+                                        <th>IP</th>
+                                        <th>Kiểm tra</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="tableBody">
+                                    <!-- Dữ liệu sẽ được thêm vào đây bằng JavaScript -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div id="hxResponseTarget" style="display:none;"></div>
+
             </main>
             <!--/Main-->
         </div>
-        <!--Footer-->
+
 
     </div>
 
 </div>
+<!-- MODAL -->
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <span class="closeBtn">&times;</span>
+        <div class="modal-header">
+            <h2>Danh sách tiến trình đang hoạt động</h2>
+        </div>
+        <div id="modalContent">
+            <div class="card-body">
+                <div class="container">
+                    <table class="table table-striped table-hover">
+                        <thead class="table-secondary">
+                            <tr>
+                                <th>PID</th>
+                                <th>Name</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableBody_modal">
+                        <!-- Dữ liệu sẽ được thêm vào đây bằng JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="{{ url_for('static', filename='form.js') }}"></script>
-
+<script src="{{ url_for('static', filename='process.js') }}"></script>
 </body>
 
 </html>

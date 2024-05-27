@@ -18,6 +18,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.js"
             integrity="sha512-zoJXRvW2gC8Z0Xo3lBbao5+AS3g6YWr5ztKqaicua11xHo+AvE1b0lT9ODgrHTmNUxeCw0Ry4BGRYZfXu70weg=="
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.4/xlsx.full.min.js"></script>
     <link rel="stylesheet" href="./dist/styles.css">
     <link rel="stylesheet" href="./dist/all.css">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i,700,700i" rel="stylesheet">
@@ -81,6 +82,14 @@
                             <span><i class="fa fa-angle-right float-right"></i></span>
                         </a>
                     </li>
+                    <li class="w-full h-full py-3 px-2 border-b border-light-border bg-white">
+                        <a href="/blacklist"
+                           class="font-sans font-hairline hover:font-normal text-sm text-nav-item no-underline">
+                            <i class="fab fa-wpforms float-left mx-2"></i>
+                            Check blacklist program
+                            <span><i class="fa fa-angle-right float-right"></i></span>
+                        </a>
+                    </li>
 
 
                 </ul>
@@ -111,7 +120,7 @@
                                     406
                                 </button>
                             </div>
-                            <button id="reportButton"
+                            <button onclick="exportToExcel()" id="reportButton"
                                     class="bg-transparent hover:bg-blue-500 text-blue-dark font-semibold hover:text-white py-2 px-4 border border-blue hover:border-transparent rounded room-button">
                                 Báo cáo
                             </button>
@@ -283,6 +292,84 @@
             }
         ]
     };
+
+            function test() {
+                var tempData;
+                for (let i = 1; i <= 3; i++) {
+                    fetch(`src/data/40${i}.json`)
+                        .then(response => response.json())
+                        .then(data => {
+                            var dataRoom;
+                            for (let j = 0; j < data.length; j++) {
+                                let ip_arr = data[j].ip;
+                                console.log("IP: " + ip_arr);
+                                let _ip_arr = ip_arr.split(".");
+                                let ip_num = parseInt(_ip_arr[3]);
+                                console.log("Checking IP: " + ip_num);
+
+                                fetch(`src/remote/program.py`, {
+                                    method: "PUT",
+                                    headers: {
+                                        'Content-Type': 'application/json'
+                                    },
+                                    body: JSON.stringify({
+                                        "room": data[j].path
+                                    })
+                                })
+                                    .then(response => {
+                                        return response.json();
+                                    })
+                                    .then(datas => {
+                                        console.log("IP " + ip_num + " is in range. Adding to computerData.");
+                                        dataRoom.push({
+                                            id: data[j].id,
+                                            name: data[j].name,
+                                            ip: data[j].ip,
+                                            room: data[j].room,
+                                            calculator: datas[0],
+                                            paint: datas[1],
+                                            word: datas[2],
+                                            excel: datas[3],
+                                            powerpoint: datas[4],
+                                            outlook: datas[5],
+                                            onenote: datas[6]
+                                        });
+                                    })
+
+                            }
+                            tempData.push({
+                                [room]: dataRoom
+                            });
+                        });
+                }
+                console.log(tempData);
+            }
+
+    function exportToExcel() {
+        var wb = XLSX.utils.book_new();
+
+        for (var room in ipData) {
+            var ws_data = [];
+            ws_data.push(["Room", "IP", "OS", "CPU Data", "RAM Data", "Disk Data", "Network Data"]);
+
+            ipData[room].forEach(function (device) {
+                ws_data.push([
+                    room,  // Thêm cột phòng
+                    device.ip,
+                    device.os,
+                    device.cpuData.join(", "),
+                    device.ramData.join(", "),
+                    device.diskData.join(", "),
+                    device.networkData.join(", ")
+                ]);
+            });
+
+            var ws = XLSX.utils.aoa_to_sheet(ws_data);
+            XLSX.utils.book_append_sheet(wb, ws, "Room " + room);
+        }
+
+        XLSX.writeFile(wb, "ipData.xlsx");
+    }
 
     // Lấy thẻ tbody của bảng phần cứng
     var hardwareTableBody = document.getElementById('hardwareTableBody');

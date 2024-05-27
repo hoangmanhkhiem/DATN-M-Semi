@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, send_from_directory
 import src.remote.restart as restart
 import src.remote.program as program
-import src.remote.process as process
+import src.remote.process as pro
 import json
 
 app = Flask(__name__, template_folder='template')
@@ -31,6 +31,10 @@ def details():
 def process():
     return render_template('process.html')
 
+@app.route('/blacklist')
+def blacklist():
+    return render_template('checking_blacklist.html')
+
 
 @app.route('/src/data/<path:path>', methods=['GET'])
 def get_data(path):
@@ -47,24 +51,25 @@ def restart():
 @app.route('/src/remote/program.py', methods=['PUT'])
 def check_program_installed():
     room = request.json['room']
-    # return program.check_program_installed_VM(room)
+    # bool_list = program.check_program_installed_VM(room)
     bool_list = ["1", "1", "1", "0", "1", "0", "1"]
+    print(bool_list)
     return bool_list
 
 
 @app.route('/src/remote/process.py', methods=['PUT'])
 def get_list_process():
     room = request.json['room']
-    # return process.exce_list_process_in_1vm(room)
-    return [{"name": "chrome.exe", "pid": "1234"}, {"name": "notepad.exe", "pid": "5678"}]
+    return pro.exce_list_process_in_1vm(room)
+    # return [{"name": "chrome.exe", "pid": "1234"}, {"name": "notepad.exe", "pid": "5678"}]
 
 
 @app.route('/src/remote/killprocess', methods=['PUT'])
 def kill_process():
     name = request.json['name']
     room = request.json['room']
-    # return process.kill_process_by_name(name,room)
-    return "SC"
+    return pro.kill_process_by_name(name,room)
+    # return "SC"
 
 
 @app.route('/install', methods=['PUT'])
@@ -76,8 +81,8 @@ def install():
         programs = json.load(f)
     for i in programs:
         if i['name'] == name_program:
-            # return program.send_file_to_vm(id, room, i['link_source'], i['link_in_vm'])
-            return 'SC'
+            return program.send_file_to_vm(id, room, i['link_source'], i['link_in_vm'])
+            # return 'SC'
     return 'Error: Program not found!'
 
 

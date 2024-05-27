@@ -95,6 +95,7 @@ function loadIP_Search() {
                                 ]
 
                                 function renderHtmlForRowTools(id_computer, room, type, index) {
+                                    room = room.toString();
                                     let tempHtml = [
                                         "<button onclick='installApp(" + id_computer + ", " + room + " , " + index + ")'><i class='fas fa-download'></i></button>",
                                         "Đã cài đặt"

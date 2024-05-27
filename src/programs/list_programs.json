@@ -1,15 +1,15 @@
 [
     {
         "id" : 1,
-        "name" : "Test",
+        "name" : "Coc Coc",
         "link_source" : "C:/Users/Administrator/Downloads/CocCocSetup.exe",
         "link_in_vm" : "C:/Users/admin/Desktop/CocCocSetup.exe"
     },
     {
         "id" : 2,
-        "name" : "Calculator",
-        "link_source" : "/home/skromnyy/Documents/BEDARN-master/static/programs/source_programs/Calculator",
-        "link_in_vm" : "C:/Users/bedarn/Desktop/Calculator"
+        "name" : "Winrar",
+        "link_source" : "C:/Users/Administrator/Desktop/lol.txt",
+        "link_in_vm" : "C:/Users/admin/Desktop/lol.txt"
     },
     {
         "id" : 3,

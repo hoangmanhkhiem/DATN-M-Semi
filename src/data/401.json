@@ -2,10 +2,10 @@
   {
     "id": 2,
     "room": 401,
-    "name": "May10",
-    "path": "D:\\May10\\May10.vmx",
+    "name": "May1",
+    "path": "D:\\May12\\May12.vmx",
     "status": "Shutdown",
-    "ip": "192.168.1.199",
+    "ip": "192.168.38.200",
     "os": "Windows 10",
     "cpu": "2",
     "memory": "4GB",

@@ -1,5 +1,7 @@
 import json
-import src.router.scripts as scripts
+import src.router.scripts as s
+import infomation as i
+import subprocess
 
 
 def get_list_ip(path_room):
@@ -15,7 +17,7 @@ def get_list_ip(path_room):
 
 
 def get_list_full_ip():
-    path_const = scripts.PATH_DATA
+    path_const = s.PATH_DATA
     list_ip = []
     try:
         # Duyet het tat ca cac file trong folder data
@@ -31,7 +33,7 @@ def get_list_full_ip():
 def set_ip_by_id(id, ip, name):
     config_list = []
     try:
-        name = scripts.PATH_DATA + name + ".json"
+        name = s.PATH_DATA + name + ".json"
         with open(name, 'r') as f:
             room = json.load(f)
             for key in room:
@@ -48,7 +50,7 @@ def set_ip_by_id(id, ip, name):
 
 def get_ip_by_id(id, name):
     try:
-        name = scripts.PATH_DATA + name + ".json"
+        name = s.PATH_DATA + name + ".json"
         with open(name, 'r') as f:
             room = json.load(f)
             for key in room:
@@ -60,7 +62,7 @@ def get_ip_by_id(id, name):
 
 
 def scan_id_in_range(start, end):
-    path_const = scripts.PATH_DATA
+    path_const = s.PATH_DATA
     config_list = []
     try:
         # Duyet het tat ca cac file trong folder data
@@ -78,3 +80,13 @@ def scan_id_in_range(start, end):
     except:
         return None
     return config_list
+
+
+def scan_ip_vm_by_id(id, room):
+    try:
+        path = i.get_pathvm_by_id_and_room(id, room)
+        path = '"' + path + '"'
+        subprocess.run([s.PATH_VMRUN, "getGuestIPAddress", path])
+    except subprocess.CalledProcessError as e:
+        print("Error running command: " + e.cmd)
+        print("Return code: " + str(e.returncode))
